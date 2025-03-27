@@ -28,7 +28,7 @@ export default function PinsDisplayModal({link, setLink, data, previews} : {link
     }
     useEffect(()=> {
         setContentForImg(data);
-    },[]);
+    },[data]);
     return (
         <DialogContent onInteractOutside={(e)=>e.preventDefault()} className="min-w-[60%] md:min-w-[80%]">
             <DialogHeader>

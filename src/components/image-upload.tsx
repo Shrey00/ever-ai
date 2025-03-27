@@ -80,6 +80,7 @@ export function ImageUpload({link, setLink} : {link: string, setLink: (value: st
         }
       );
       const data = response.data.output[0].content[0].text;
+      console.log(data);
       setResponse(JSON.parse(data));
       setTextGenerationLoading(false);
       setShowReviewModal(true);
