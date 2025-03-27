@@ -30,15 +30,15 @@ export function SidebarNav() {
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={pathname === "/"}>
                 <Link href="/">
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  <span>Create Posts</span>
+                  <PlusCircle className="mr-1 h-4 w-4" />
+                  <span>Create Pins</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={pathname === "/create"}>
                 <Link href="/create">
-                  <Home className="mr-2 h-4 w-4" />
+                  <Home className="mr-1 h-4 w-4" />
                   <span>Recent Post</span>
                 </Link>
               </SidebarMenuButton>
@@ -46,7 +46,7 @@ export function SidebarNav() {
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter className="mt-auto">
-          <SidebarMenu>
+          {/* <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg">
                 <Avatar className="h-8 w-8">
@@ -59,7 +59,7 @@ export function SidebarNav() {
                 </div>
               </SidebarMenuButton>
             </SidebarMenuItem>
-          </SidebarMenu>
+          </SidebarMenu> */}
         </SidebarFooter>
       </Sidebar>
     </SidebarProvider>
