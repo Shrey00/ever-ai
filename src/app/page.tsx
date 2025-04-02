@@ -8,24 +8,21 @@ import { Button } from "@/components/ui/button";
 import { SelectBoard } from "@/components/select-board";
 import Image from "next/image";
 import Link from "next/link";
+import CreateBoardModal from "@/components/create-board-modal";
+import { Dialog } from "@radix-ui/react-dialog";
+// import { useRouter } from "next/navigation";
 export default function Page() {
   const [link, setLink] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [createBoardOpen, setCreateBoardOpen] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   const [boardId, setBoardId] = useState("");
   // const searchParams = useSearchParams();
   useEffect(() => {
-    // const accessToken = searchParams.get("accessToken");
-    // const refreshToken = searchParams.get("refreshToken");
-    const cookies = document.cookie.split(';');
-    const accessToken = cookies.find(cookie => cookie.trim().startsWith('accessToken='))?.split('=')[1];
-    // const refreshToken = cookies.find(cookie => cookie.trim().startsWith('refreshToken='));
-    // if (accessToken) {
-      // localStorage.setItem("token", accessToken!);
-      // localStorage.setItem("refreshToken", refreshToken!);
-    // }
-    // const token = localStorage.getItem("token");
-    console.log("COOKIES", accessToken)
+    const cookies = document.cookie.split(";");
+    const accessToken = cookies
+      .find((cookie) => cookie.trim().startsWith("accessToken="))
+      ?.split("=")[1];
     if (accessToken?.length) {
       setAccessToken(accessToken);
       setLoggedIn(true);
@@ -54,15 +51,13 @@ export default function Page() {
                     accessToken={accessToken}
                     value={boardId}
                     setValue={setBoardId}
+                    setCreateBoardOpen={setCreateBoardOpen}
                   />
                 )}
               </div>
               <div className="space-y-2">
                 <h2 className="text-xl font-bold">Add Link</h2>
-                <Input
-                  value={link}
-                  onChange={(e) => setLink(e.target.value)}
-                />
+                <Input value={link} onChange={(e) => setLink(e.target.value)} />
               </div>
               <ImageUpload link={link} setLink={setLink} boardId={boardId} />
             </div>
@@ -84,10 +79,15 @@ export default function Page() {
             </h2>
           </div>
           <Button asChild size={"lg"} className="z-10">
-            <Link href="/api/oauth/pinterest/install">Connect</Link>
+            <Link href="/api/oauth/pinterest/install">
+              Connect
+            </Link>
           </Button>
         </div>
       )}
+      <Dialog open={createBoardOpen} onOpenChange={setCreateBoardOpen}>
+        <CreateBoardModal accessToken={accessToken} />
+      </Dialog>
     </div>
   );
 }

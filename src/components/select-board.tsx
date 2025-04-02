@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
-
+import { PlusIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -24,10 +24,12 @@ export function SelectBoard({
   accessToken,
   value,
   setValue,
+  setCreateBoardOpen
 }: {
   accessToken?: string;
   value: string;
   setValue: (value: string) => void;
+  setCreateBoardOpen: (value: boolean) => void;
 }) {
   const [open, setOpen] = React.useState(false);
   // const [value, setValue] = React.useState("");
@@ -40,7 +42,9 @@ export function SelectBoard({
     };
     getBoards();
   }, []);
-
+  const handleBoardModalOpen = () => {
+    setCreateBoardOpen(true);
+  }
   return (
     <div>
       {accessToken && (
@@ -70,6 +74,7 @@ export function SelectBoard({
                     <CommandItem
                       key={board.id}
                       value={board.id}
+                      className="cursor-pointer"
                       onSelect={(currentValue) => {
                         setValue(currentValue === value ? "" : currentValue);
                         setOpen(false);
@@ -87,6 +92,9 @@ export function SelectBoard({
                 </CommandGroup>
               </CommandList>
             </Command>
+            <div className="p-1 pt-0">
+            <Button className="w-full cursor-pointer font-normal" variant="ghost" onClick={handleBoardModalOpen}><PlusIcon/>Create Board</Button>
+            </div>
           </PopoverContent>
         </Popover>
       )}
