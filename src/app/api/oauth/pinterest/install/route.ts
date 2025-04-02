@@ -1,7 +1,7 @@
 import { NextResponse} from "next/server";
 
 export async function GET() {
-    const redirect_uri = 'http://localhost:3000/api/oauth/pinterest/auth-response';
+    const redirect_uri = `${process.env.NEXT_PUBLIC_URL}/api/oauth/pinterest/auth-response`;
     const client_id = process.env.PINTEREST_CLIENT_ID!;
     const scope = "boards:read,boards:write,pins:read,pins:write,catalogs:read,catalogs:write,user_accounts:read";
     const response_type = "code";

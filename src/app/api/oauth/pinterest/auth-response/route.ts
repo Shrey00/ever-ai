@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
       "base64"
     );
     const redirect_uri =
-      "http://localhost:3000/api/oauth/pinterest/auth-response";
+      `${process.env.NEXT_PUBLIC_URL}/api/oauth/pinterest/auth-response`;
     const grant_type = "authorization_code";
     const payload = {
       code,
@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
       maxAge: 60 * 60 * 24 * 60,
     });
     return NextResponse.redirect(
-      `http://localhost:3000`
+      `${process.env.NEXT_PUBLIC_URL}`
     );
   } catch (error) {
     console.log(error);

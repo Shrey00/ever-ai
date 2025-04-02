@@ -76,7 +76,7 @@ export default function PinsDisplayModal({
     };
     try {
       const response = await fetch(
-        `http://localhost:3000/api/create-pins?accessToken=${accessToken}`,
+        `${process.env.NEXT_PUBLIC_URL}/api/create-pins?accessToken=${accessToken}`,
         {
           method: "POST",
           headers: {
